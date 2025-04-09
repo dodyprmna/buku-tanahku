@@ -5,14 +5,15 @@ namespace App\Livewire\Auth;
 use Livewire\Component;
 use Livewire\Attributes\Layout;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 #[Layout('components.layouts.auth')]
 
 class Login extends Component
 {
 
-    public $username ='';
-    public $password ='';
+    public $username;
+    public $password;
 
     public function render()
     {
@@ -25,11 +26,29 @@ class Login extends Component
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
-            session()->regenerate();
-            return redirect()->intended('/'); // atau route index kamu
+        $user = User::where('username', $this->username)->first();
+        if (!$user) {
+            $this->dispatch('swal', [
+                'title' => 'Gagal!',
+                'text'  => 'Username tidak ditemukan',
+                'icon'  => 'error',
+            ]);
+            return;
+        };
+
+        if (!Auth::attempt($credentials)) {
+            $this->dispatch('swal', [
+                'title' => 'Gagal!',
+                'text'  => 'Password yang anda masukkan salah',
+                'icon'  => 'error',
+            ]);
+            return;
         }
 
-        $this->addError('email', 'Email atau password salah.');
+
+        session()->regenerate();
+        return redirect()->intended('/'); // atau route index kamu
+
+
     }
 }
