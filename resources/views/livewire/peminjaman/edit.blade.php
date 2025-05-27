@@ -1,7 +1,7 @@
 <div class="container-xxl flex-grow-1 container-p-y">
     <div class="card">
         <div class="card-header flex-column flex-md-row">
-            <h5 class="card-title mb-0">Form Peminjaman</h5>
+            <h5 class="card-title mb-0">Form Edit Peminjaman</h5>
         </div>
         {{-- select2 --}}
         @push('styles')
@@ -10,7 +10,7 @@
         @endpush
         {{-- end select2 --}}
         <div class="card-body">
-            <form wire:submit = {{ $editingIndex === null ? "addItem" : "updateItem" }}>
+            <form wire:submit = 'update'>
             {{-- <input type="text" wire:model="editingIndex"> --}}
             <div class="row">
                 <div class="col-md-6 mb-3">
@@ -62,7 +62,7 @@
                     <div class="form-group">
                         <label class="form-label" for="kelurahan">Kelurahan / Desa*</label>
                         <select class="form-select select2" id="kelurahan" wire:model="selectedKelurahan" required>
-                            <option value="" elected hidden required>- Pilih Kelurahan / Desa -</option>
+                            <option value="" selected hidden required>- Pilih Kelurahan / Desa -</option>
                                 @foreach ($kelurahans as $kel)
                                     <option value="{{ $kel->id }}">{{ $kel->nama_kelurahan }}</option>
                                 @endforeach
@@ -70,66 +70,12 @@
                     </div>
                 </div>
                 <div class="col-md-12">
-                    <button class="btn btn-primary" type="submit">
-                        {{ $editingIndex === null ? 'Tambah Item' : 'Update Item' }}
-                    </button>
+                    <button class="btn btn-primary" type="submit">Simpan</button>
                 </div>
             </form>
             </div>
         </div>
     </div>
-    <div class="card mt-2">
-        <div class="card-header flex-column flex-md-row">
-            <h5 class="card-title mb-0">Item Peminjaman</h5>
-        </div>
-        <div class="card-body">
-            <form wire:submit="store">
-            <div class="table-responsive table-stripped ">
-                <table class="table table-responsive">
-                    <tr>
-                        <th>#</th>
-                        <th>Kecamatan</th>
-                        <th>Kel/Desa</th>
-                        <th>Jenis Hak</th>
-                        <th>Nomor Hak</th>
-                        <th>Nomor SU</th>
-                        <th>Peruntukan</th>
-                        <th>Aksi</th>
-                    </tr>
-                    @php
-                        $no = 1;
-                    @endphp
-
-                    @foreach ($bukuTanah as $index => $item)
-                    <tr>
-                        <th>{{ $no++ }}</th>
-                        <th>{{ $item['nama_kecamatan'] }}</th>
-                        <th>
-                            {{ $item['nama_kelurahan'] }}
-                            <input type="hidden" name="id_kelurahan[]" value="{{ $item['id_kelurahan'] }}">
-                            <input type="hidden" name="id_peruntukan[]" value="{{ $item['id_peruntukan'] }}">
-                            <input type="hidden" name="jenis_hak[]" value="{{ $item['jenis_hak'] }}">
-                            <input type="hidden" name="nomor_hak[]" value="{{ $item['nomor_hak'] }}">
-                            <input type="hidden" name="nomor_su[]" value="{{ $item['nomor_su'] }}">
-                        </th>
-                        <th>{{ $item['jenis_hak'] }}</th>
-                        <th>{{ $item['nomor_hak'] }}</th>
-                        <th>{{ $item['nomor_su'] }}</th>
-                        <th>{{ $item['nama_peruntukan'] }}</th>
-                        <th>
-                            <button type="button" class="btn btn-primary btn-sm" wire:click="editItem({{ $index }})"><i class="ri-edit-line"></i></button>
-                        </th>
-                    </tr>
-                    @endforeach
-                </table>
-                @if (count($bukuTanah) > 0)
-                <button class="btn btn-primary mt-2" type="submit" style="width:100%">Submit</button>
-                @endif
-            </div>
-            </form>
-        </div>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener('livewire:initialized', () => {
