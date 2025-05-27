@@ -16,7 +16,7 @@
 
           <div class="card-body mt-1">
             <h4 class="mb-1">Selamat Datang Kembali 👋🏻</h4>
-            <p class="mb-5">Silakan masuk untuk mengelola data peminjaman dan pengembalian buku tanah</p>
+            <p class="mb-5">Silahkan masuk untuk mengelola data peminjaman dan pengembalian buku tanah</p>
 
             <form id="formAuthentication" class="mb-5" wire:submit.prevent="authentication" method="POST">
               <div class="form-floating form-floating-outline mb-5">
@@ -72,8 +72,8 @@
         </div>
         <!-- /Login -->
         <img
-        width="30%"
-          src="{{ asset('assets/img/illustrations/ilustrasi3.png') }}"
+        width="32%"
+          src="{{ asset('assets/img/illustrations/4.png') }}"
           alt="auth-tree"
           class="authentication-image-object-left d-none d-lg-block" />
         <img
@@ -84,8 +84,8 @@
           data-app-light-img="illustrations/auth-basic-mask-light.png"
           data-app-dark-img="illustrations/auth-basic-mask-dark.png" />
         <img
-        width="30%"
-          src="{{ asset('assets/img/illustrations/ilustrasi4.png') }}"
+        width="33%"
+          src="{{ asset('assets/img/illustrations/8.png') }}"
           alt="auth-tree"
           class="authentication-image-object-right d-none d-lg-block" />
       </div>
