@@ -14,12 +14,12 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Geolend</title>
+    <title>Buku Tanahku</title>
 
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}" />
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/books.png') }}" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -50,7 +50,8 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('assets/js/config.js') }}"></script>
     @vite(['resources/css/app.css','resources/js/app.js'])
-    {{-- @livewireStyles --}}
+    @livewireStyles
+    @stack('styles')
   </head>
 
   <body>
@@ -92,10 +93,11 @@
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
 
+    @livewireScripts
     <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/popper/popper.js') }}"></script>
     {{-- <script src="{{ asset('assets/vendor/js/bootstrap.js') }}"></script> --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" data-navigate-once></script>
     <script src="{{ asset('assets/vendor/libs/node-waves/node-waves.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
     <script src="{{ asset('assets/vendor/js/menu.js') }}"></script>
@@ -108,8 +110,7 @@
     <!-- Main JS -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <!-- Page JS -->
-
-    @livewireScripts
+    @stack('scripts')
     {{-- @livewireScripts --}}
   </body>
 </html>
